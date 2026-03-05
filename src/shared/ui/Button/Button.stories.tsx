@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./Button";
-import { useState } from "react";
 
 const meta: Meta<typeof Button> = {
   title: "UI/Button",
@@ -12,6 +11,7 @@ const meta: Meta<typeof Button> = {
     },
     disabled: { control: "boolean" },
     onClick: { action: "clicked" },
+    children: { text: "text" },
   },
 };
 
@@ -43,18 +43,5 @@ export const Disabled: Story = {
   args: {
     children: "Disabled",
     disabled: true,
-  },
-};
-
-export const Interactive: Story = {
-  render: () => {
-    const [count, setCount] = useState(0);
-    return (
-      <div>
-        <Button onClick={() => setCount(count + 1)}> + </Button>
-        <h1>{count}</h1>
-        <Button onClick={() => setCount(count - 1)}> - </Button>
-      </div>
-    );
   },
 };

@@ -6,8 +6,9 @@ const meta: Meta<typeof Input> = {
   component: Input,
   argTypes: {
     placeholder: { control: "text" },
-    error: { control: "text" },
-    disabled: { control: "boolean" },
+    value: { text: "text" },
+    error: { text: "text" },
+    disabled: { boolean: "boolean" },
     onChange: { action: "changed" },
   },
 };
