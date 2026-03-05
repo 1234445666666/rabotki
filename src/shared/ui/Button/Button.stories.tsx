@@ -50,10 +50,10 @@ export const Interactive: Story = {
   render: () => {
     const [count, setCount] = useState(0);
     return (
-      <div style={{ display: "flex", gap: "10px" }}>
-        <Button onClick={() => setCount(count - 1)}> - </Button>
-        <span style={{ padding: "8px" }}>{count}</span>
+      <div>
         <Button onClick={() => setCount(count + 1)}> + </Button>
+        <h1>{count}</h1>
+        <Button onClick={() => setCount(count - 1)}> - </Button>
       </div>
     );
   },
