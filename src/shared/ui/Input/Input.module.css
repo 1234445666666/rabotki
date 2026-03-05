@@ -1,0 +1,22 @@
+.input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: blue;
+}
+
+.error {
+  border-color: red;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}

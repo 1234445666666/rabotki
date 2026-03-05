@@ -1,0 +1,28 @@
+.button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.primary {
+  background: blue;
+  color: white;
+}
+
+.secondary {
+  background: gray;
+  color: white;
+}
+
+.outline {
+  background: white;
+  border: 1px solid blue;
+  color: blue;
+}
