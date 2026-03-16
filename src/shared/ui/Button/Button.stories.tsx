@@ -5,13 +5,9 @@ const meta: Meta<typeof Button> = {
   title: "UI/Button",
   component: Button,
   argTypes: {
-    variant: {
-      control: "select",
-      options: ["primary", "secondary", "outline"],
-    },
-    disabled: { control: "boolean" },
-    onClick: { action: "clicked" },
-    children: { text: "text" },
+    disabled: { control: "boolean" }, // ✅ чекбокс
+    onClick: { action: "clicked" }, // ✅ действие
+    children: { control: "text" }, // ✅ текстовое поле (было неправильно!)
   },
 };
 
