@@ -1,29 +1,23 @@
-import Counter from "./components/Counter/counter";
-import Form from "./components/Form/form";
-import Scroll from "./components/Scroll/scroll";
-import { useState } from "react";
-import Modal from "./components/Modal/modal";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import Test from "./components/HOC/test";
+import Home from "../page/Home";
+import About from "../page/About";
+import Profile from "../page/Profile";
+import Error from "../page/Error";
+import User from "../page/User";
+import Layout from "./components/Layout/counter";
+import Login from "../page/Login";
 export default function App() {
-  const [isOpen, setIsOpen] = useState(false);
   return (
-    <div>
-      <Counter />
-      <Form />
-      <Scroll />
-      <div>
-        <button onClick={() => setIsOpen(true)}>Открыть модалку</button>
-
-        {isOpen && (
-          <Modal onClose={() => setIsOpen(false)}>
-            <h2>Модальное окно</h2>
-            <p>Это содержимое модалки</p>
-            <button onClick={() => setIsOpen(false)}>Закрыть</button>
-          </Modal>
-        )}
-      </div>
-      <Test />
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/user/:id" element={<User />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<Error />} />
+      </Route>
+    </Routes>
   );
 }
