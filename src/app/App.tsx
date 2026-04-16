@@ -1,23 +1,74 @@
 import { Routes, Route } from "react-router-dom";
-import "./App.css";
-import Home from "../page/Home";
-import About from "../page/About";
-import Profile from "../page/Profile";
-import Error from "../page/Error";
-import User from "../page/User";
-import Layout from "./components/Layout/counter";
-import Login from "../page/Login";
+import { Header } from "./components/Header/header";
+import { ProtectedRoute } from "./auth/ProtectedRoute";
+import { Home } from "../pages/Home";
+import { Login } from "../pages/Login";
+import { Profile } from "../pages/Profile";
+import { ManageCourse } from "../pages/ManageCourse";
+import { Courses } from "../pages/Courses";
+import Admin from "../pages/Admin";
+
+function NotFoundPage() {
+  return (
+    <div style={{ padding: "0 16px" }}>
+      <h1>404</h1>
+      <p>Страница не найдена.</p>
+    </div>
+  );
+}
+
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/user/:id" element={<User />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="*" element={<Error />} />
-      </Route>
-    </Routes>
+    <div>
+      <Header />
+      <main style={{ paddingTop: "16px" }}>
+        <Routes>
+          {/* Публичные маршруты -- доступны всем */}
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+
+          {/* Защищённый маршрут -- ProfilePage обёрнута в ProtectedRoute.
+              Если пользователя нет -- ProtectedRoute перенаправит на /login,
+              и ProfilePage вообще не будет рендериться. */}
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/courses"
+            element={
+              <ProtectedRoute allowedRoles={["student", "teacher", "admin"]}>
+                <Courses />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/courses/manage"
+            element={
+              <ProtectedRoute allowedRoles={["teacher", "admin"]}>
+                <ManageCourse />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <Admin />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Все остальные адреса */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
+    </div>
   );
 }
